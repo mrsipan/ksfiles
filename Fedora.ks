@@ -79,6 +79,33 @@ chrony
 %end #%packages
 
 
+# Harden sshd, permit root login the first time
+cat <<'EOF' >/etc/ssh/sshd_config
+Protocol 2
+SyslogFacility AUTHPRIV
+#PermitRootLogin no
+PermitRootLogin yes
+#PasswordAuthentication no
+PasswordAuthentication yes
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials yes
+UsePAM yes
+X11Forwarding no
+X11DisplayOffset 10
+Subsystem sftp /usr/libexec/openssh/sftp-server
+EOF
+
+cat <<'EOF' >/etc/ssh/ssh_config
+Host *
+  ForwardAgent yes
+  ForwardX11 yes
+  GSSAPIAuthentication yes
+  ForwardX11Trusted yes
+EOF
+
+
 %post --log=/root/kspost.log
 
 # run in subshell

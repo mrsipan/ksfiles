@@ -133,8 +133,10 @@ done
 cat <<'EOF' >/etc/ssh/sshd_config
 Protocol 2
 SyslogFacility AUTHPRIV
-PermitRootLogin no
-PasswordAuthentication no
+#PermitRootLogin no
+PermitRootLogin yes
+#PasswordAuthentication no
+PasswordAuthentication yes
 PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 GSSAPIAuthentication yes
