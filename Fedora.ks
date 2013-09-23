@@ -79,7 +79,8 @@ chrony
 %end #%packages
 
 
-# Harden sshd, permit root login the first time
+# Harden sshd, permit root login
+# puppet should disable this after its first run
 cat <<'EOF' >/etc/ssh/sshd_config
 Protocol 2
 SyslogFacility AUTHPRIV
