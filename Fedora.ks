@@ -55,7 +55,6 @@ lsof
 strace
 which
 sudo
-at
 cronie
 smartmontools
 wget
@@ -121,7 +120,7 @@ EOF
 
 %post --log=/root/kspost.log
 
-TO_DISABLE="NetworkManager smartd"
+TO_DISABLE="NetworkManager smartd firewalld"
 for svc in $TO_DISABLE; do
   /bin/systemctl disable ${svc}.service
 done
