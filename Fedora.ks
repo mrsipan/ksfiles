@@ -125,4 +125,9 @@ for svc in $TO_DISABLE; do
   /bin/systemctl disable ${svc}.service
 done
 
+TO_ENABLE="network"
+for svc in $TO_ENABLE; do
+  /bin/systemctl enable ${svc}.service
+done
+
 %end #%post
