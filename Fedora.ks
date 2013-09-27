@@ -12,7 +12,7 @@ timezone  America/New_York
 install
 zerombr
 network --bootproto=dhcp --device=eth0 --onboot=on --hostname={{ hostname }}
-#reboot
+reboot
 url --url={{ installurl }}
 logging --level=info
 
@@ -32,7 +32,7 @@ d2=$3
 
 cat << EOF > /tmp/partinfo
 clearpart --drives=$d1 --initlabel
-part / --fstype=ext4 --size=1024 --asprimary --grow
+part / --fstype=ext3 --size=1024 --asprimary --grow
 EOF
 
 %end #%pre
@@ -106,6 +106,15 @@ Host *
   ForwardX11Trusted yes
 EOF
 
+cat <<'EOF' > /etc/sysconfig/network-scripts/ifcfg-eth0
+#set during ks
+DEVICE=eth0
+BOOTPROTO=dhcp
+ONBOOT=yes
+TYPE=Ethernet
+NM_CONTROLLED=no
+
+EOF
 
 %post --log=/root/kspost.log
 
