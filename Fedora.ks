@@ -11,7 +11,7 @@ skipx
 timezone  America/New_York
 install
 zerombr
-network --bootproto=dhcp --device=eth0 --onboot=on --hostname={{ hostname }}
+network --bootproto=dhcp --device=eth0 --onboot=on --hostname=None
 reboot
 url --url={{ installurl }}
 logging --level=info
@@ -32,7 +32,7 @@ d2=$3
 
 cat << EOF > /tmp/partinfo
 clearpart --drives=$d1 --initlabel
-part / --fstype=ext3 --size=1024 --asprimary --grow
+part / --fstype=ext4 --size=1024 --asprimary --grow
 EOF
 
 %end #%pre
@@ -96,6 +96,7 @@ UsePAM yes
 X11Forwarding no
 X11DisplayOffset 10
 Subsystem sftp /usr/libexec/openssh/sftp-server
+
 EOF
 
 cat <<'EOF' >/etc/ssh/ssh_config
@@ -104,6 +105,7 @@ Host *
   ForwardX11 yes
   GSSAPIAuthentication yes
   ForwardX11Trusted yes
+
 EOF
 
 cat <<'EOF' > /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -113,14 +115,15 @@ BOOTPROTO=dhcp
 ONBOOT=yes
 TYPE=Ethernet
 NM_CONTROLLED=no
+DHCP_HOSTNAME=None
 
 EOF
 
 %post --log=/root/kspost.log
 
-# run in subshell
-(
-{{ extra_post }}
-)
+TO_DISABLE="NetworkManager smartd"
+for svc in $TO_DISABLE; do
+  /bin/systemctl disable ${svc}.service
+done
 
 %end #%post
