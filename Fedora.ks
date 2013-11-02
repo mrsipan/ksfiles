@@ -74,6 +74,10 @@ chrony
 -freetype
 -libX11
 -xorg-x11-filesystem
+-NetworkManager
+-at
+-firewalld
+-smartmontools
 
 %end #%packages
 
