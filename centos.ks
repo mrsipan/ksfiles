@@ -80,6 +80,7 @@ openssh
 -freetype
 -libX11
 -xorg-x11-filesystem
+-NetworkManager
 %end
 
 %post
@@ -96,6 +97,7 @@ services="ntpd
           xinetd
           syslog-ng
           postfix
+          network
           crond"
 
 for service in $services; do
