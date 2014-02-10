@@ -13,7 +13,7 @@ install
 zerombr
 network --bootproto=dhcp --device=eth0 --onboot=on --hostname=None
 reboot
-url --url={{ installurl }}
+url --url={{ install_url }}
 logging --level=info
 
 rootpw --iscrypted {{ root_passwd }}
