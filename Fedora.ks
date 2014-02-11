@@ -31,7 +31,7 @@ let numd=$#/2
 d1=$1
 d2=$3
 
-cat << EOF > /tmp/partinfo
+/bin/cat << EOF > /tmp/partinfo
 clearpart --drives=$d1 --initlabel
 part / --fstype=ext4 --size=1024 --asprimary --grow
 EOF
