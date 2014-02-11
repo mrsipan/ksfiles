@@ -13,7 +13,7 @@ install
 zerombr
 network --bootproto=dhcp --device=eth0 --onboot=on
 reboot
-url --url={{ installurl }}
+url --url={{ install_url }}
 logging --level=info
 
 rootpw --iscrypted {{ root_passwd }}
@@ -22,6 +22,8 @@ rootpw --iscrypted {{ root_passwd }}
 %include /tmp/partinfo
 
 %pre
+#!/bin/bash
+
 ## Determine how many drives are available
 set $(list-harddrives)
 let numd=$#/2
@@ -37,9 +39,7 @@ EOF
 
 %packages --excludedocs --nobase
 bash
-{{ kernel-type }}
-#kernel-xen
-#kernel
+kernel
 grub
 e2fsprogs
 passwd
@@ -214,6 +214,4 @@ EOF
 # clean yum local cache
 /usr/bin/yum clean all
 
-# extra scripts
-{{ extra }}
 %end

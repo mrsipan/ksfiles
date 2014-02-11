@@ -23,6 +23,7 @@ rootpw --iscrypted {{ root_passwd }}
 
 
 %pre
+#!/bin/bash
 
 ## Determine how many drives are available
 set $(list-harddrives)
