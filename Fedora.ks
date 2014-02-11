@@ -31,7 +31,7 @@ let numd=$#/2
 d1=$1
 d2=$3
 
-/bin/cat << EOF > /tmp/partinfo
+cat << EOF > /tmp/partinfo
 clearpart --drives=$d1 --initlabel
 part / --fstype=ext4 --size=1024 --asprimary --grow
 EOF
@@ -83,6 +83,8 @@ chrony
 %end #%packages
 
 
+%post --log=/root/kspost.log
+
 # Harden sshd, permit root login
 # puppet should disable this after its first run
 cat <<'EOF' >/etc/ssh/sshd_config
@@ -122,8 +124,6 @@ NM_CONTROLLED=no
 DHCP_HOSTNAME=None
 
 EOF
-
-%post --log=/root/kspost.log
 
 TO_DISABLE="NetworkManager smartd firewalld"
 for svc in $TO_DISABLE; do
