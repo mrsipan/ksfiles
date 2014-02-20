@@ -13,10 +13,11 @@ install
 zerombr
 network --bootproto=dhcp --device=eth0 --onboot=on --hostname=None
 reboot
-url --url={{ install_url }}
+url --url=http://mirror.cc.vt.edu/pub/fedora/linux/releases/20/Fedora/x86_64/os/
 logging --level=info
 
-rootpw --iscrypted {{ root_passwd }}
+# set passwd
+rootpw --iscrypted $1$redhat$pRYx4oykDgtMyJUbXmnC2.
 
 # partition code
 %include /tmp/partinfo
