@@ -135,4 +135,7 @@ for svc in $TO_ENABLE; do
   /bin/systemctl enable ${svc}.service
 done
 
+# extra
+{{ extra }}
+
 %end #%post

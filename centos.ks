@@ -85,17 +85,10 @@ openssh
 
 %post
 
-# Disable stock definitions
-#mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.disabled
-mv /etc/yum.repos.d/CentOS-Media.repo /etc/yum.repos.d/CentOS-Media.repo.disabled
-mv /etc/yum.repos.d/CentOS-Debuginfo.repo /etc/yum.repos.d/CentOS-Debuginfo.repo.disabled
-mv /etc/yum.repos.d/CentOS-Vault.repo /etc/yum.repos.d/CentOS-Vault.repo.disabled
-
 # Enable services
 services="ntpd
           sshd
           xinetd
-          syslog-ng
           postfix
           network
           crond"
@@ -210,6 +203,9 @@ net.ipv6.conf.all.send_redirects = 0
 net.ipv4.ip_local_port_range = 22000 65535
 net.ipv4.tcp_tw_reuse = 1
 EOF
+
+# extra
+{{ extra }}
 
 # clean yum local cache
 /usr/bin/yum clean all
