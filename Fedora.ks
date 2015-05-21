@@ -11,7 +11,7 @@ skipx
 timezone  America/New_York
 install
 zerombr
-network --bootproto=dhcp --device=eth0 --onboot=on --hostname=None
+network --bootproto=dhcp --onboot=on --hostname=None
 reboot
 url --url=http://mirror.cc.vt.edu/pub/fedora/linux/releases/20/Fedora/x86_64/os/
 logging --level=info
